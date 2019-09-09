@@ -382,7 +382,7 @@ letter-spacing: 5px;
 	padding-left: 1000px; 
 	position: relative;
     width: 100%;
-    cursor:not-allowed;
+   cursor: pointer; 
 	
 }
 /*progress circles*/

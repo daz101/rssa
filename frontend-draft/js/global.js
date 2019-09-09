@@ -3,45 +3,44 @@ var nrOfQns = 0;
 
 $(document).ready(function(){
 	
-	//Introduction page changes 
+			//Introduction page changes 
 	$('#consent, #consentButton, #resize, #resizeButton, #instructions, #instructionsBody, #begin').hide();
-	$('#welcome').click(function(){ 
-    	$('#optional, #mainBody, #welcome').hide();
+	$('#welcome').click(function() {
+		$('#optional, #mainBody, #welcome').hide();
 		$('#consent, #consentButton').show().fadeIn("slow");
-    });
-$("#consent_Q tr td").click(function() {
+		$("#consentButton").css({
+			"cursor": "not-allowed"
+		});
+
+	});
+
+	$('#resizeButton').click(function() {
+		$('#resize, #resizeButton').hide();
+		$('#begin, #instructionsBody').show().fadeIn("slow");
+	});
+
+	$("#begin").click(function() {
+		//$(location).attr('href', 'preference.html')
+		window.STUDY.getInstance().move(1);
+	});
+	//Consent page safeguard 
+	$('input[type=checkbox][name=consent_test]').change(function() {
+		$(".safe-button").children("button").css({
+			"cursor": "pointer"
+		});
+		consent_check = 1;
+	});
+
+	$("#consent_Q tr td").click(function() {
 		$('#consentCheckbox').trigger('click');
 		$(this).find('input[type="checkbox"]').each(function() {
 			$(this).prop('checked', true);
 		});
 		$("#consent_Q").css("border-left", "3px solid #00cc00");
 	});
-	
-	$('#resizeButton').click(function(){
-		$('#resize, #resizeButton').hide();	
-		$('#begin, #instructionsBody').show().fadeIn("slow");	
-	});	
-	
-	$( "#begin" ).click(function() { 
-		$(location).attr('href', 'preference.html')
-	});
-	//Consent page safeguard 
-	$('input[type=checkbox][name=consent_test]').change(function(){
-		$(".safe-button").children("button").css({"cursor":"pointer"});
-		consent_check=1;
-	});
 
-	$( "#consent_Q tr td" ).click(function() {
-		$('#consentCheckbox').trigger('click');
-		$(this).find('input[type="checkbox"]').each(function() {
-			$(this).prop('checked',true);
-		});
-		$("#consent_Q").css("border-left","3px solid #00cc00");
-	});
-
-	$( "#consentButton" ).click(function() { 
-  		if(consent_check==1)
-		{
+	$("#consentButton").click(function() {
+		if (consent_check == 1) {
 			$('#consent, #consentButton').hide();
 			$('#resize, #resizeButton').show().fadeIn("slow");
 		}
@@ -55,6 +54,10 @@ $("#consent_Q tr td").click(function() {
 			$(".img-block").css({
 				"border": "4px solid blue"
 			});
+			
+			$(".middle").css({
+				"opacity": "0.9"
+			});
 		}
 	});
 
@@ -66,7 +69,7 @@ $("#consent_Q tr td").click(function() {
 
  		
  		//$("input.prefStar:checked").parentUntil(".wrapper-block").not(".middle, .rating").css({"border": "5px solid gold"}).addClass("rated");
- 		$("input.prefStar:checked").parent().parent().parent().css({"border": "5px solid gold"}).addClass("rated");
+ 		$("input.prefStar:checked").parent().parent().parent().css({"border": "5px solid #24c14c"}).addClass("rated");
 
         document.getElementById('NumberOfRankedMovies').innerHTML = document.querySelectorAll('.rated').length;	
 
@@ -80,14 +83,14 @@ $("#consent_Q tr td").click(function() {
 
  $('#left-list a').on('click', function (e) {
   e.preventDefault()
-  $(this).('show')
+  //$(this).('show');
 })
 
 	//end of consent safeguard 
     $("#mov1").hover(function(){
     	$(".card-title").text("Lion King"); 
     	$(".card-img").attr('src', 'img/m1.jpg');	
-       	$("#tester").toggle();
+       	$("#tester2").toggle();
     });
 	
 	$("#mov2").hover(function(){
